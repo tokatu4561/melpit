@@ -44,6 +44,7 @@ class CreateAppTables extends Migration
             $table->unsignedBigInteger('secondary_category_id');
             $table->unsignedBigInteger('item_condition_id');
             $table->string('name');
+            $table->string('image_file_name');
             $table->text('description');
             $table->unsignedBigInteger('price');
             $table->string('status');
