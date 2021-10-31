@@ -2,7 +2,7 @@
 [テックピット参考](https://www.techpit.jp/courses/139)!
 
 
-![画像名](a1b5efb2-9e0a-4ab6-8e)
+[テックピット](a1b5efb2-9e0a-4ab6-8e)
 
 
 
