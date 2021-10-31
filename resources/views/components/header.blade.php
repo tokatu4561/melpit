@@ -6,27 +6,27 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                 <form class="form-inline" method="GET" action="{{ route('top') }}">
-                     <div class="input-group">
-                         <div class="input-group-prepend">
-                             <select class="custom-select" name="category">
-                                 <option value="">全て</option>
-                                 @foreach ($categories as $category)
-                                     <option value="primary:{{$category->id}}" class="font-weight-bold" {{ $default['category'] == "primary:" . $category->id ? 'selected' : ''}}>{{$category->name}}</option>
-                                     @foreach ($category->secondaryCategories as $secondary)
-                                         <option value="secondary:{{$secondary->id}}" {{ $default['category'] == "secondary:".$secondary->id ? 'selected' : ''}}>　{{$secondary->name}}</option>
-                                     @endforeach
-                                 @endforeach
-                             </select>
-                         </div>
-                         <input type="text" value="{{ $default['keyword'] }}"name="keyword" class="form-control" aria-label="Text input with dropdown button" placeholder="キーワード検索">
-                         <div class="input-group-append">
-                             <button type="submit" class="btn btn-outline-dark">
-                                 <i class="fas fa-search"></i>
-                             </button>
-                         </div>
-                     </div>
-                 </form>
+                <form class="form-inline" method="GET" action="{{ route('top') }}">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <select class="custom-select" name="category">
+                                <option value="">全て</option>
+                                @foreach ($categories as $category)
+                                <option value="primary:{{$category->id}}" class="font-weight-bold" {{ $default['category'] == "primary:" . $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                @foreach ($category->secondaryCategories as $secondary)
+                                <option value="secondary:{{$secondary->id}}" {{ $default['category'] == "secondary:".$secondary->id ? 'selected' : ''}}>　{{$secondary->name}}</option>
+                                @endforeach
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="text" value="{{ $default['keyword'] }}" name="keyword" class="form-control" aria-label="Text input with dropdown button" placeholder="キーワード検索">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-dark">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
                 @guest
                 {{-- 非ログイン --}}
                 <li class="nav-item">
@@ -50,13 +50,31 @@
 
                     <!-- ドロップダウンメニュー -->
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-item-text">
+                            <div class="row no-gutters">
+                                <div class="col">売上金</div>
+                                <div class="col-auto">
+                                    <i class="fas fa-yen-sign"></i>
+                                    <span class="ml-1">{{number_format($user->sales)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item-text">
+                            <div class="row no-gutters">
+                                <div class="col">出品数</div>
+                                <div class="col-auto">{{number_format($user->soldItems->count())}} 個</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('sell') }}">
                             <i class="fas fa-camera text-left" style="width: 30px"></i>商品を出品する
                         </a>
                         <a class="dropdown-item" href="{{ route('mypage.edit-profile') }}">
                             <i class="far fa-address-card text-left" style="width: 30px"></i>プロフィール編集
                         </a>
-
+                        <a class="dropdown-item" href="{{ route('mypage.bought-items') }}">
+                            <i class="fas fa-shopping-bag text-left" style="width: 30px"></i>購入した商品
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt text-left" style="width: 30px"></i>ログアウト

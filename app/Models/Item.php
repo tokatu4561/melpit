@@ -12,14 +12,18 @@ class Item extends Model
      // 購入済み
      const STATE_BOUGHT = 'bought';
 
-     public function getIsStateSellingAttribute()
+     protected $casts = [
+        'bought_at' => 'datetime',
+    ];
+
+     public function getisStateSellingAttribute()
      {
-         return $this->state === self::STATE_SELLING;
+         return $this->status === self::STATE_SELLING;
      }
 
      public function getIsStateBoughtAttribute()
      {
-         return $this->state === self::STATE_BOUGHT;
+         return $this->status === self::STATE_BOUGHT;
      }
 
      public function secondaryCategory()
